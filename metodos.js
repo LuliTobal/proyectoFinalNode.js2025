@@ -1,18 +1,25 @@
 const url = 'https://fakestoreapi.com/products';
 
-async function traerProductos () {
+export async function traerProductos () {
     try{
         const response = await fetch(url , {
             method: 'GET',
         })
         const data = await response.json();
-        console.log(data);
+       data.forEach( producto => {
+            console.log(`
+Nombre: ${producto.title}
+Precio: ${producto.price}
+Categoría: ${producto.category}
+`);
+        });
+        //console.log(data);
     } catch (e) {
         console.log(`ERROR AL TRAER LOS PRODUCTOS - ${e}`)
     }
 };
 
-async function traerUnitario (id) {
+export async function traerUnitario (id) {
     try{
         const response = await fetch(`${url}/${id}` , {
             method: 'GET',
@@ -24,7 +31,7 @@ async function traerUnitario (id) {
     }
 };
 
-async function crearProducto (producto) {
+export async function crearProducto (producto) {
     try{
         const response = await fetch(url , {
             method: 'POST',
@@ -32,29 +39,16 @@ async function crearProducto (producto) {
             body: JSON.stringify(producto)
         })
         const data = await response.json();
-        console.log(`el producto agregado: ${data}`);
+        console.log(`Se agrego el siguiente producto:
+            Nombre: ${data.title}
+            Precio: ${data.price}
+            Categoría: ${data.category}`);
     } catch (e) {
         console.log(`ERROR AL CREAR PRODUCTO - ${e}`)
     }
 };
 
-async function actualizarProducto (producto) {
-    try{
-        const response = await fetch(`${url}/${producto.id}`, {
-            method: 'PUT',
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(producto)
-        })
-
-        const data = await response.json();
-        console.log(data);
-
-    }catch (e){
-        console.log(`ERROR, PRODUCTO NO ACTUALIZADO - ${e}`)
-    }
-}
-
-async function eliminarProducto (id) {
+export async function eliminarProducto (id) {
     try{
         const response = await fetch(`${url}/${id}`, {
             method: 'DELETE'
