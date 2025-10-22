@@ -16,11 +16,11 @@ if (args [0] == 'GET' ) {
 } else if (args[0] == 'H') {
     console.log(`
 Comandos disponibles:
-    ♦ Para ver todos los productos disponibles: node index.js GET productos
-    ♦ Para ver la información de un producto en particular: node index.js GET producto <ID>
-    ♦ Para agregar un nuevo producto a la tienda: node index.js POST <nombre> <precio> <categoría>
-    ♦ Para eliminar un producto de la tienda: node index.js DELETE <ID>
+    ♦ Para ver todos los productos disponibles: npm start GET productos
+    ♦ Para ver la información de un producto en particular: npm start GET producto <ID>
+    ♦ Para agregar un nuevo producto a la tienda: npm start POST <nombre> <precio> <categoría>
+    ♦ Para eliminar un producto de la tienda: npm start DELETE <ID>
 `);
 } else {
-    console.log(`Se ha producido un error, el comando no es correcto, ejecutando "node index.js H" podes ver las opciones de comandos disponibles`)
+    console.log(`Se ha producido un error, el comando no es correcto, ejecutando "npm start H" podes ver las opciones de comandos disponibles`)
 };
