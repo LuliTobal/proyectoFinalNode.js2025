@@ -8,7 +8,7 @@ if (args [0] == 'GET' ) {
     } else if (args.length > 2) {
         traerUnitario(args[2])
     }
-} else if (args [0] == 'POST') {
+} else if (args[0] == 'POST' && args.length == 4) {
     const producto = {"title": args[1], "price": args[2], "category": args[3]}
     crearProducto(producto)
 } else if (args [0] == 'DELETE') {

@@ -40,6 +40,7 @@ export async function crearProducto (producto) {
         })
         const data = await response.json();
         console.log(`Se agrego el siguiente producto:
+            ID: ${data.id}
             Nombre: ${data.title}
             Precio: ${data.price}
             Categoría: ${data.category}`);
