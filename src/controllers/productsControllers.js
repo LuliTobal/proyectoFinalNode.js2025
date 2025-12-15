@@ -3,6 +3,7 @@ import * as productsServices from '../services/productsServices.js';
 export const getAllProducts = async (req, res) => {
     try {
         const products = await productsServices.getAllProductsServices();
+        console.log(products);
         res.status(200).json(products);
     } catch (error) {
         res.status(500);
@@ -13,7 +14,11 @@ export const getProductID = async (req, res) => {
     const id = req.params.id;
     try {
         const product = await productsServices.getProductIDServices(id);
-        res.status(200).json(product);
+        if (product) {
+            res.status(200).json(product);  
+        } else {
+            res.status(404).json({message: 'Error, producto no encontrado'})
+        };
     } catch (error) {
         res.status(400).json({message: 'Error en la petición. Controlar que ID sea correcto'})
     };
@@ -30,10 +35,14 @@ export const addProduct = async (req, res) => {
 };
 
 export const deleteProducts = async (req, res) => {
-    const id = req.params.id;
     try {
-        await deleteProductsServices(id);
-        res.status(200).json({message: 'El producto ha sido eliminado con exito!'})
+        const id = req.params.id;
+        if(id) {
+            await productsServices.deleteProductsServices(id);
+            res.sendStatus(200) 
+        } else {
+            res.status(400).json(error)
+        }
     } catch (error) {
         res.status(500).json({message: 'ha ocurrido un error, el producto no pudo ser eliminado'});
     };

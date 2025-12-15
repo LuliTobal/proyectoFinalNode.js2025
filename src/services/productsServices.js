@@ -4,8 +4,13 @@ export const getAllProductsServices = async() => {
     return(
         new Promise( async(res, rej) => {
             try {
-                const products = await productsModels.allProductsModels();
-                res(products);
+                const collectionSnap = await productsModels.allProductsModels();
+                const productos = [];
+                collectionSnap.forEach((doc) => {
+                    productos.push({...doc.data(), id: doc.id}) 
+                });
+                console.log(productos);
+                res(productos);
             } catch (error) {
                 rej(error);
             }
@@ -17,8 +22,7 @@ export const getProductIDServices = async(id) => {
     return(
         new Promise( async(res, rej) => {
             try {
-                const allProducts = await productsModels.allProductsModels();
-                const product = allProducts.find(allProducts.id === id);
+                const product = await productsModels.getProductIDModels(id);
                 res(product);
             } catch (error) {
                 rej(error);

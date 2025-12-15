@@ -1,13 +1,14 @@
 import express from 'express';
 import cors from 'cors';
+import productsRouter from './src/routes/productsRouter.js'
+import logRutes from './src/routes/authRouter.js'
+
 
 const app = express();
-app.use(exp)
-//////////////////////////////////////////////////////////////////////////////////////////////
-//REVISAR
+app.use(express.json());
+
 const PORT = process.env.PORT || 3000
-//
-//////////////////////////////////////////////////////////////////////////////////////////////
+
 const corsConfig = {
     method : ['GET', 'PUT', 'POST', 'DELETE'],
     allowedHaders : ['Content-Type', 'Authorization'],
@@ -17,7 +18,7 @@ const corsConfig = {
 
 app.use(cors(corsConfig));
 
-//FALTA CONFIGURAR PROTECCION DE RUTAS
+app.use('/api', logRutes)
 
 app.use('/api', productsRouter);
 
